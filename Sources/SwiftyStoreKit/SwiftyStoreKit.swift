@@ -64,7 +64,13 @@ public class SwiftyStoreKit {
         }
     }
     
-    fileprivate func purchase(product: SKProduct, quantity: Int, atomically: Bool, applicationUsername: String = "", simulatesAskToBuyInSandbox: Bool = false, paymentDiscount: PaymentDiscount? = nil, completion: @escaping (PurchaseResult) -> Void) {
+    public func purchase(product: SKProduct,
+                         quantity: Int,
+                         atomically: Bool,
+                         applicationUsername: String = "",
+                         simulatesAskToBuyInSandbox: Bool = false,
+                         paymentDiscount: PaymentDiscount? = nil,
+                         completion: @escaping (PurchaseResult) -> Void) {
         paymentQueueController.startPayment(Payment(product: product, paymentDiscount: paymentDiscount, quantity: quantity, atomically: atomically, applicationUsername: applicationUsername, simulatesAskToBuyInSandbox: simulatesAskToBuyInSandbox) { result in
             
             completion(self.processPurchaseResult(result))
@@ -154,7 +160,12 @@ extension SwiftyStoreKit {
     ///  - Parameter completion: handler for result
     ///  - returns: A cancellable `InAppRequest` object   
     @discardableResult
-    public class func purchaseProduct(_ productId: String, quantity: Int = 1, atomically: Bool = true, applicationUsername: String = "", simulatesAskToBuyInSandbox: Bool = false, completion: @escaping (PurchaseResult) -> Void) -> InAppRequest {
+    public class func purchaseProduct(_ productId: String,
+                                      quantity: Int = 1,
+                                      atomically: Bool = true,
+                                      applicationUsername: String = "",
+                                      simulatesAskToBuyInSandbox: Bool = false,
+                                      completion: @escaping (PurchaseResult) -> Void) -> InAppRequest {
         
         return sharedInstance.purchaseProduct(productId, quantity: quantity, atomically: atomically, applicationUsername: applicationUsername, simulatesAskToBuyInSandbox: simulatesAskToBuyInSandbox, completion: completion)
     }
@@ -166,7 +177,13 @@ extension SwiftyStoreKit {
     ///  - Parameter applicationUsername: an opaque identifier for the user’s account on your system
     ///  - Parameter product: optional discount to be applied. Must be of `SKProductPayment` type
     ///  - Parameter completion: handler for result
-    public class func purchaseProduct(_ product: SKProduct, quantity: Int = 1, atomically: Bool = true, applicationUsername: String = "", simulatesAskToBuyInSandbox: Bool = false, paymentDiscount: PaymentDiscount? = nil, completion: @escaping ( PurchaseResult) -> Void) {
+    public class func purchaseProduct(_ product: SKProduct,
+                                      quantity: Int = 1,
+                                      atomically: Bool = true,
+                                      applicationUsername: String = "",
+                                      simulatesAskToBuyInSandbox: Bool = false,
+                                      paymentDiscount: PaymentDiscount? = nil,
+                                      completion: @escaping ( PurchaseResult) -> Void) {
         
         sharedInstance.purchase(product: product, quantity: quantity, atomically: atomically, applicationUsername: applicationUsername, simulatesAskToBuyInSandbox: simulatesAskToBuyInSandbox, paymentDiscount: paymentDiscount, completion: completion)
     }
